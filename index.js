@@ -12,13 +12,12 @@ app.use(express.json());
 
 app.use("/api", apiRoutes);
 
-// Start server after connection of DB
-db.connect((err) => {
-    if (err) throw err;
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-    });
-});
-
 // Start prompt
-new MainMenu().begin();
+new MainMenu().start();
+
+db.connect((err) => {
+  if (err) throw err;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+});
